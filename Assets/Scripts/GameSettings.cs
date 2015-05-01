@@ -4,6 +4,8 @@ using UnityStandardAssets.ImageEffects;
 
 //Bodhi Donselaar 2015
 public class GameSettings : MonoBehaviour {
+    public bool Pause = false;
+    public float TimeScale=1;
     public enum TextureRes{High, Medium, Low};
     public TextureRes TextureResolution=TextureRes.High;
     public enum AA{Off,FXAA,MSAA2,MSAA4};
@@ -16,6 +18,8 @@ public class GameSettings : MonoBehaviour {
     public bool Vsync=true;
     public bool Shadows=true;
     public bool SoftShadows=true;
+    public bool Vibration = true;
+    public static bool VibrationEnable=true;
     public bool Apply=false;
 
 
@@ -35,11 +39,22 @@ public class GameSettings : MonoBehaviour {
             ApplySettings();
             Apply=false;
         }
-
+        if (Pause)
+        {
+            Time.timeScale = 0;
+        }
+        if (!Pause&&Time.timeScale==0)
+        {
+            Time.timeScale=TimeScale;
+        }
     }
 
     void ApplySettings()
     {
+        if (!Pause)
+        {
+            Time.timeScale = TimeScale;
+        }
         switch(TextureResolution)
         {
             case TextureRes.High: 
@@ -55,7 +70,6 @@ public class GameSettings : MonoBehaviour {
                 QualitySettings.masterTextureLimit=0;
                 break;
         }
-
 
         switch(AntiAliasingLevel)
         {
@@ -109,6 +123,6 @@ public class GameSettings : MonoBehaviour {
                 lightid.shadows=LightShadows.None;
             }
         }
-
+        VibrationEnable = Vibration;
     }
 }

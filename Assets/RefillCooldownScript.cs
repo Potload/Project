@@ -16,7 +16,6 @@ public class RefillCooldownScript : MonoBehaviour {
     void OnDisable(){
         LaserCalculate.CoolDown [source] -= 0.25f;
         LaserCalculate.CoolDown [partner] -= 0.25f;
-        LaserCalculate.ShootLength [CombinedNr + 4] = 0;
     }
 	// Update is called once per frame
 	void Update () {

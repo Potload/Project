@@ -2,6 +2,8 @@
 using System.Collections;
 //Bodhi Donselaar 2015
 public class PlayerControll : MonoBehaviour {
+    public bool DebugAlwaysShoot;
+    public bool DrijfUitElkaar;
     public GameObject CameraDirection;
     public int Player;
     public float WalkSpeedInput;
@@ -14,6 +16,11 @@ public class PlayerControll : MonoBehaviour {
     Quaternion GoDir;
     float LerpShoot=10;
     float Hoek=0;
+    bool Abort = false;
+    bool Abort2=false;
+    private Ray ray;                    
+    private RaycastHit hit;     
+    public Transform normal;
 
     void Start()
     {
@@ -24,12 +31,27 @@ public class PlayerControll : MonoBehaviour {
     {
         WalkSpeed = WalkSpeedInput * Time.deltaTime;
 
-        if (xbox.Connected [Player])
+        //reset
+        LaserCalculate.Shoot [gameObject.layer-8] = false;
+
+        if (xbox.Connected [Player]&&Time.timeScale>0)
         {
             Walking();   
             Aiming();
             Shooting();
         } 
+        if (!xbox.Connected [Player]&&Time.timeScale>0&&DebugAlwaysShoot)
+        {
+            Walking();   
+            Aiming();
+            Shooting();
+        } 
+        if (DebugAlwaysShoot)
+        {
+            LaserCalculate.Shoot [gameObject.layer-8] = true;
+            LaserCalculate.CoolingDown[gameObject.layer-8]=0;
+            LaserCalculate.CoolDown[gameObject.layer-8]=1;
+        }
 	}
 
     void Walking () 
@@ -46,8 +68,35 @@ public class PlayerControll : MonoBehaviour {
         CamRight = Vector3.ClampMagnitude(CamRight, 1);
         
         transform.rotation=Quaternion.LookRotation(CamForward);
-        transform.position += (CamForward * xbox.LY [Player]) * WalkSpeed;
-        transform.position += (CamRight * xbox.LX [Player]) * WalkSpeed;
+        Abort2 = false;
+        CheckForWall(transform.position + (CamRight * xbox.LX [Player]) * WalkSpeed);
+        if (Abort)
+        {
+            Abort2=true;
+        }
+        CheckForWall(transform.position + (CamForward * xbox.LY [Player]) * WalkSpeed);
+        Vector3 Aim=((CamRight * xbox.LX [Player]))+((CamForward * xbox.LY [Player]));
+
+
+        Debug.DrawLine(transform.position,transform.position+(Aim*10000));
+        if (Abort||Abort2)
+        {
+
+            int layerMask = 1 << gameObject.layer;
+            layerMask = ~layerMask;
+
+            ray = new Ray(transform.position,Aim);  
+            if(Physics.Raycast(ray.origin,ray.direction, out hit,10,layerMask))
+            { 
+                ray = new Ray(transform.position,-hit.normal);  
+                if(Physics.Raycast(ray.origin,ray.direction, out hit,10,layerMask))
+                { 
+               
+                    normal.rotation=Quaternion.LookRotation(hit.normal);
+                    CheckForWall(transform.position - ((normal.right * Vector3.Cross(Aim,hit.normal).y)*WalkSpeed));
+                }
+            }
+        }
         transform.rotation = PrevDir;
     }
 
@@ -57,8 +106,8 @@ public class PlayerControll : MonoBehaviour {
         if (xbox.RT [Player] > 0.5&&LaserCalculate.CoolDown[Player]>0&&!LaserCalculate.OverHeated[Player]&&LaserCalculate.Disable[Player]<0.1)
         {
             LerpShoot = 1;
-            LaserCalculate.Shoot [Player] = true;
-            LaserCalculate.CoolingDown[Player]=0;
+            LaserCalculate.Shoot [gameObject.layer-8] = true;
+            LaserCalculate.CoolingDown[gameObject.layer-8]=0;
             if (Hoek==0)
             {
                 xbox.VR [Player] = 0.2f;
@@ -67,7 +116,7 @@ public class PlayerControll : MonoBehaviour {
         } else
         {
             LerpShoot = 10;
-            LaserCalculate.Shoot [Player] = false;
+            LaserCalculate.Shoot [gameObject.layer-8] = false;
         }
     }
 
@@ -89,16 +138,15 @@ public class PlayerControll : MonoBehaviour {
             TegenDrukVibratie = Mathf.Sin(Mathf.Abs(Hoek * 0.01745f))+0.2f;
             TegenDrukVibratie = Mathf.Clamp(TegenDrukVibratie, 0, 1);
             xbox.VR [Player] = TegenDrukVibratie;
-
-            if (Hoek > 0)
+            if (DrijfUitElkaar)
             {
-                //print("Draai "+Player+" Naar Rechts");
-                //transform.Rotate(0, Time.deltaTime * TegenDruk, 0);
-
-            } else
-            {
-                //print("Draai "+Player+" Naar Links");
-               // transform.Rotate(0, -Time.deltaTime * TegenDruk, 0);
+                if (Hoek > 0)
+                {
+                    transform.Rotate(0, Time.deltaTime * TegenDruk, 0);
+                } else
+                {
+                    transform.Rotate(0, -Time.deltaTime * TegenDruk, 0);
+                }
             }
 
         } 
@@ -106,5 +154,26 @@ public class PlayerControll : MonoBehaviour {
 
         transform.rotation = PrevDir;
         transform.rotation=Quaternion.Lerp(transform.rotation,GoDir,Time.deltaTime*LerpShoot);
+    }
+
+    void CheckForWall(Vector3 Pos)
+    {
+        Abort = false;
+        Collider[] hitColliders = Physics.OverlapSphere(Pos, 1); 
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            if (hitColliders [i].gameObject.layer == 0)
+            {
+                Abort = true;
+            }
+            if (hitColliders [i].gameObject.layer != gameObject.layer && hitColliders [i].tag == "Player")
+            {
+                Abort = true;
+            }
+        }
+        if (!Abort)
+        {
+            transform.position = Pos;
+        }
     }
 }

@@ -105,6 +105,11 @@ public class xbox : MonoBehaviour
                 if (state.DPad.Right == ButtonState.Pressed){DPADRIGHT[i]=1;}else{DPADRIGHT[i]=0;}
 
                 //vibration
+                if (!GameSettings.VibrationEnable)
+                {
+                    VL[i]=0f;
+                    VR[i]=0f;
+                }
                 GamePad.SetVibration(playerIndex, VL[i], VR[i]);
                 VL[i]=0f;
                 VR[i]=0f;

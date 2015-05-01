@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CamTarget.cs" />
      <Compile Include="Assets\CooldownBar.cs" />
      <Compile Include="Assets\Data\Standard Assets\Effects\ImageEffects\Scripts\Antialiasing.cs" />
      <Compile Include="Assets\Data\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
@@ -88,6 +89,7 @@
      <Compile Include="Assets\Data\Xbox\xbox.cs" />
      <Compile Include="Assets\Data\cTowerLightFlash.cs" />
      <Compile Include="Assets\RefillCooldownScript.cs" />
+     <Compile Include="Assets\RigidbodyFirstPersonController.cs" />
      <Compile Include="Assets\Scripts\GameSettings.cs" />
      <Compile Include="Assets\Scripts\LaserCalculate.cs" />
      <Compile Include="Assets\Scripts\PlayerControll.cs" />
