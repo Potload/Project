@@ -170,6 +170,7 @@ public class PlayerControll : MonoBehaviour {
             {
                 Abort = true;
             }
+
         }
         if (!Abort)
         {

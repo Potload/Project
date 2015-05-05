@@ -196,6 +196,11 @@ public class LaserCalculate : MonoBehaviour {
                 ray = new Ray(Players[i].transform.position,Players[i].transform.forward);  
                 if(Physics.Raycast(ray.origin,ray.direction, out hit, BeamLength[i]*ShootLength[i],layerMask)) //raak ik iets?
                 { 
+				if (hit.collider.gameObject.tag == "Enemy"){
+
+					hit.collider.gameObject.GetComponent<Enemy>().LaserNoCombo();
+
+				}
                     BeamLength[i]=hit.distance; //ik raak iets, dus ik word korter
                     int HitLayer=hit.collider.gameObject.layer-Players[0].gameObject.layer;
                     if (HitLayer>-1&&HitLayer<4) //raak ik een andere laser? hoger dan 3 is een gecombinede
@@ -310,6 +315,11 @@ public class LaserCalculate : MonoBehaviour {
                 BeamLength[k+4]=LaserDistance*ShootLength[k+4]; //als ie niks raakt is ie nog steeds maximaal laserdistance
                 if(Physics.Raycast(ray.origin,ray.direction, out hit, LaserDistance*BeamLength[k+4],layerMask)) //raak ik iets?
                 {
+					if (hit.collider.gameObject.tag == "Enemy"){
+						
+						hit.collider.gameObject.GetComponent<Enemy>().LaserCombined();
+						
+					}
                     int HitLayer=hit.collider.gameObject.layer-Players[0].gameObject.layer;
                     BeamLength[k+4]=hit.distance*ShootLength[k+4];
                     if (HitLayer==4||HitLayer==5)
@@ -339,7 +349,14 @@ public class LaserCalculate : MonoBehaviour {
                 layerMask = ~layerMask;             
                 ray = new Ray(Players[j].transform.position,Players[j].transform.forward);  
                 if(Physics.Raycast(ray.origin,ray.direction, out hit, BeamLength[j],layerMask)) //raak ik iets?
-                { 
+				
+				if (hit.collider.gameObject.tag == "Enemy"){
+					
+					hit.collider.gameObject.GetComponent<Enemy>().LaserFinal();
+					
+				}
+				
+				{ 
                     BeamLength[j]=hit.distance;
                     //raak ik een gecombineerde laser?
                 }
@@ -373,7 +390,7 @@ public class LaserCalculate : MonoBehaviour {
             if (CoolDown [h] < 0)
             {
                 CoolDown [h] = 0;
-                CoolingDown [h] = 0.1f;
+                CoolingDown [h] = 0.1f; 
                 OverHeated [h] = true;
             }
         }

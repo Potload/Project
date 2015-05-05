@@ -1,0 +1,246 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: enemy_screen
+  m_Shader: {fileID: 4800000, guid: 48371a2838eb4834da60dfdf393d387e, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 5189fb3b52bef3d44846624c2c809389, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _OcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EmissionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailMask
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailAlbedoMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Alpha
+        second:
+          m_Texture: {fileID: 2800000, guid: c7d30696062708041b7734c671214be8, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: .00100000005}
+      data:
+        first:
+          name: _ImageOver
+        second:
+          m_Texture: {fileID: 2800000, guid: fe6d17e079aaa9f4594bfd43a0c38c21, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal
+        second:
+          m_Texture: {fileID: 2800000, guid: 0a7023d39ebe0c144a2ea78d2a23b53a, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _CubeMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DispTex
+        second:
+          m_Texture: {fileID: 2800000, guid: e08c295755c0885479ad19f518286ff2, type: 3}
+          m_Scale: {x: 1.99000001, y: 1.01999998}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _AlphaRolloff
+        second:
+          m_Texture: {fileID: 2800000, guid: 2c913367842ac254fa56450136207c05, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Cutoff
+        second: .5
+      data:
+        first:
+          name: _SrcBlend
+        second: 1
+      data:
+        first:
+          name: _DstBlend
+        second: 0
+      data:
+        first:
+          name: _thickness
+        second: 1
+      data:
+        first:
+          name: _Strength
+        second: .200000003
+      data:
+        first:
+          name: _SinHeight
+        second: 14.6823196
+      data:
+        first:
+          name: _SinSpeed
+        second: 23.7864094
+      data:
+        first:
+          name: _Parallax
+        second: .0199999996
+      data:
+        first:
+          name: _ZWrite
+        second: 1
+      data:
+        first:
+          name: _Glossiness
+        second: .5
+      data:
+        first:
+          name: _BumpScale
+        second: 1
+      data:
+        first:
+          name: _OcclusionStrength
+        second: 1
+      data:
+        first:
+          name: _DetailNormalMapScale
+        second: 1
+      data:
+        first:
+          name: _UVSec
+        second: 0
+      data:
+        first:
+          name: _EmissionScaleUI
+        second: .150000006
+      data:
+        first:
+          name: _Mode
+        second: 0
+      data:
+        first:
+          name: _Metallic
+        second: .578000009
+      data:
+        first:
+          name: _Intensity
+        second: .465000004
+      data:
+        first:
+          name: _GreenBlue
+        second: 1
+    m_Colors:
+      data:
+        first:
+          name: _EmissionColor
+        second: {r: .610294104, g: .534007311, b: .534007311, a: .752941191}
+      data:
+        first:
+          name: _Color
+        second: {r: .025951555, g: .0288987048, b: .0588235259, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _Glow
+        second: {r: 0, g: .889655173, b: 0, a: 1}
+      data:
+        first:
+          name: _EmissionColorUI
+        second: {r: .147058815, g: .15415819, b: .29411763, a: 1}
+      data:
+        first:
+          name: _node_1071
+        second: {r: 1, g: .558620572, b: 0, a: 1}
+      data:
+        first:
+          name: _node_4000
+        second: {r: .368350893, g: .0999135002, b: .485294104, a: 1}
+      data:
+        first:
+          name: _AlphaColor
+        second: {r: .757352948, g: .428795427, b: .428795427, a: .376470596}
+      data:
+        first:
+          name: _ImageColor
+        second: {r: 1, g: 1, b: 1, a: .70588237}
+      data:
+        first:
+          name: _Emission
+        second: {r: 1, g: 1, b: 1, a: 0}
